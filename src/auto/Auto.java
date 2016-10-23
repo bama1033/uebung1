@@ -1,10 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package auto;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -13,45 +11,67 @@ import java.util.Collections;
  * @author Martin
  */
 public class Auto {
-    public static void main(String[] args) {
-        // TODO 
+    public static void main(String[] args) throws IOException {
         //Reading File
-        //choose Modus
+        //choose Modus(x)
         //Find Prio (x)
         //Fing KGV(x)
-        //Ausgabe
-        //Deadline überschreitung
+        //RSA
+        //Ausgabe(x)
+
         Task ta =new Task("A",1,3,3);
         Task tb =new Task("B",1,6,6);
         Task tc =new Task("C",1,5,5);
         Task td =new Task("D",2,10,9);
+        
+        try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Martin\\Desktop\\test.txt")))
+		{
+			String sCurrentLine;
+			while ((sCurrentLine = br.readLine()) != null) {
+				System.out.println(sCurrentLine);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+        
         ArrayList<Task> list = new ArrayList<>();
+        
         list.add(ta);
         list.add(tb);
         list.add(tc);
         list.add(td);
-        String modus= chooseModus("RMS");
-        list = choosePrio(list);
+        String mode ="RMS";//RMS oder DMS
+        
+        list = choosePrio(list,mode);
+        
+        RSA.checkRSA(list);
+
         
         int kgv= (int) getKGV(list);
         operate(list,kgv);
-        System.out.println("Hi");
+
         System.out.println(kgv);
     }
-    
-    public static String chooseModus(String mode) {
-        return "RMS";
-        //rms DMS kann über Task setPrio gmeacht werden
-    }
-    
-        public static ArrayList<Task>  choosePrio(ArrayList<Task> mode) {
+     
+        public static ArrayList<Task>  choosePrio(ArrayList<Task> array,String mode) {
           /*     System.out.println("Before Sorting:");
-               System.out.println(mode.get(0).getName());
-               System.out.println(mode.get(1).getName());
-               System.out.println(mode.get(2).getName());
-               System.out.println(mode.get(3).getName());*/
-	   Collections.sort(mode);
-        return mode;
+               System.out.println(array.get(0).getName());
+               System.out.println(array.get(1).getName());
+               System.out.println(array.get(2).getName());
+               System.out.println(array.get(3).getName());*/
+         if(mode.equals("RMS")){
+	Collections.sort(array);
+        return array;}
+         
+        else if(mode.equals("DMS")){
+            Collections.sort(array, new CC());
+            return array;}
+        
+        else
+              System.out.println("Falscher mOdus?");
+          return array;
+                  
+          
     }
 
         private static long gcd(long a, long b){
@@ -71,42 +91,26 @@ public class Auto {
                  result = (int) lcm(result, list.get(i).getPeriod());
              return result;
         }
-    public static void operate(ArrayList<Task> list, int kgv) {
+        public static void operate(ArrayList<Task> array, int kgv) {
         //for schleife durch array nach actives checken, falls active gefunden break(+ausgabe) und alle perioden um 1 verkürzen
         //dann wieder array von vorne durchgehen und schauen wer aktiv ist wenn aktiv break(+ausgabe) und subtrahieren
       for (int z = 0; z < kgv; z++){
           if(z!=0){
-               for(int a=0; a < list.size(); a++){
-                    list.get(a).setPeriod(list.get(a).getPeriod()-1);
-                    if(list.get(a).getPeriod()==0 &&list.get(a).getCompute()==0){
-                        list.get(a).setCompute(list.get(a).getComputeOrig());
-                        list.get(a).setPeriod(list.get(a).getPeriodOrig());
+               for(int a=0; a < array.size(); a++){
+                    array.get(a).setPeriod(array.get(a).getPeriod()-1);
+                    if(array.get(a).getPeriod()==0 &&array.get(a).getCompute()==0){
+                        array.get(a).setCompute(array.get(a).getComputeOrig());
+                        array.get(a).setPeriod(array.get(a).getPeriodOrig());
                     }
                }
           }
-                 for (int i = 0; i < list.size(); i++){
-                    if(list.get(i).getCompute()>0){
-                    System.out.print(list.get(i).getName());
-                    list.get(i).setCompute(list.get(i).getCompute()-1);
+                 for (int i = 0; i < array.size(); i++){
+                    if(array.get(i).getCompute()>0){
+                    System.out.print(array.get(i).getName());
+                    array.get(i).setCompute(array.get(i).getCompute()-1);
                     break;
                     }
                 }
       }      
     }
 }
-
-/*
-               for(int a=0; a < list.size(); a++){
-                    int C= list.get(a).getActive();
-                    C=C-1;
-                    list.get(a).setActive(C);
-               }
-*/
-/*
-            if(list.get(i).getActive() <=0){
-                System.out.print(list.get(i).getName());
-                list.get(i).setActive(list.get(i).getPeriod());
-
-                break;
-            }
-*/
