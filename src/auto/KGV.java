@@ -27,6 +27,7 @@ public class KGV {
              int result = list.get(0).getPeriod();
              for(int i = 1; i < list.size(); i++) 
                  result = (int) lcm(result, list.get(i).getPeriod());
+             System.out.println("Das KGV ist"+result);
              return result;
         }
 }

@@ -49,8 +49,6 @@ public class Auto {
         
         int kgv= (int) KGV.getKGV(list);
        // operate(list,kgv);
-
-        System.out.println(kgv);
     }
      
         public static ArrayList<Task>  choosePrio(ArrayList<Task> list,String mode) {
