@@ -12,11 +12,11 @@ import java.util.ArrayList;
  * @author Martin
  */
 public class KGV {
-            public static long gcd(long a, long b){
-            while (b > 0){
-                long temp = b;
-                b = a % b; // % is remainder
-                a = temp;
+        public static long gcd(long a, long b){
+        while (b > 0){
+            long temp = b;
+            b = a % b; // % is remainder
+            a = temp;
             }
             return a;
         }

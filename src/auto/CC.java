@@ -9,8 +9,9 @@ import java.util.Comparator;
  *
  * @author Martin
  */
-public class CC implements Comparator<Task>{
 
+//Comparator for Deadlineattribute
+public class CC implements Comparator<Task>{
 
     @Override
     public int compare(Task o1, Task o2) {

@@ -25,7 +25,7 @@ public class Task implements Comparable<Task>  {
             this.periodOrig = period;
             this.deadline = deadline;
 	}
-	//TODO if deadline empty...
+        
 	public String getName() {
 		return name;
 	}

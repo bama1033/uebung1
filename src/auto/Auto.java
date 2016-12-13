@@ -16,9 +16,8 @@ public class Auto {
         //choose Modus(x)
         //Find Prio (x)
         //Fing KGV(x)
-        //RSA
+        //RTA
         //Ausgabe(x)
-
         Task ta =new Task("A",1,3,3);
         Task tb =new Task("B",1,6,6);
         Task tc =new Task("C",1,5,5);
@@ -26,9 +25,9 @@ public class Auto {
         
         try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Martin\\Desktop\\test.txt")))
 		{
-			String sCurrentLine;
-			while ((sCurrentLine = br.readLine()) != null) {
-				//System.out.println(sCurrentLine);
+		    String sCurrentLine;
+                    while ((sCurrentLine = br.readLine()) != null) {
+			//System.out.println(sCurrentLine);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -44,33 +43,27 @@ public class Auto {
         
         list = choosePrio(list,mode);
         
-        RTA.checkRTA(list);
-
-        
+    //    RTA.checkRTA(list);
         int kgv= (int) KGV.getKGV(list);
-       // operate(list,kgv);
+        operate(list,kgv);
     }
-     
         public static ArrayList<Task>  choosePrio(ArrayList<Task> list,String mode) {
-          /*     System.out.println("Before Sorting:");
+          /*   System.out.println("Before Sorting:");
                System.out.println(list.get(0).getName());
                System.out.println(list.get(1).getName());
                System.out.println(list.get(2).getName());
                System.out.println(list.get(3).getName());*/
          if(mode.equals("RMS")){
-	Collections.sort(list);
-        return list;}
+            Collections.sort(list);
+            return list;}
          
         else if(mode.equals("DMS")){
             Collections.sort(list, new CC());
             return list;}
-        
         else
               System.out.println("Falscher mOdus?");
-          return list;
-                  
-          
-    }
+          return list;  
+        }
 
 
         public static void operate(ArrayList<Task> list, int kgv) {
@@ -88,9 +81,9 @@ public class Auto {
           }
                  for (int i = 0; i < list.size(); i++){
                     if(list.get(i).getCompute()>0){
-                    System.out.print(list.get(i).getName());
-                    list.get(i).setCompute(list.get(i).getCompute()-1);
-                    break;
+                        System.out.print(list.get(i).getName());
+                        list.get(i).setCompute(list.get(i).getCompute()-1);
+                        break;
                     }
                 }
       }      
